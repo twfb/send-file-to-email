@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Config email.</title>
+    <link rel="stylesheet" href="../static/css/bulma.min.css">
+    <script defer src="../static/js/all.js"></script>
+    <script defer src="../static/js/config.js"></script>
+
+</head>
+
+<body>
+<section class="section" style="padding-bottom: 10px">
+    <div class="container">
+        <h1 style="font-family:  FreeMono, monospace;font-size: xx-large">
+            Config email.
+        </h1>
+
+    </div>
+</section>
+
+<section class="section" style="margin-bottom: 0;padding-bottom: 0">
+    <div class="field">
+        <label class="label" style="font-family:  FreeMono, monospace;">Sender Email</label>
+        <p class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="xxx@xxx.xxx" name="sender_email" id="sender_email"
+                   value="{{ EMAIL_SENDER }}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+            </span>
+        </p>
+        <p class="help is-danger" style="display: none;" id="invalid_sender_email"></p>
+    </div>
+    <div class="field">
+        <label class="label" style="font-family:  FreeMono, monospace;">Email Pass</label>
+        <p class="control has-icons-left">
+            <input class="input" type="text" placeholder="xxxxxxxxx" name="email_pass" id="email_pass"
+                   value="{{ EMAIL_PASS }}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </p>
+        <p class="help is-danger" style="display: none;" id="invalid_email_pass"></p>
+    </div>
+    <div class="field">
+        <label class="label" style="font-family:  FreeMono, monospace;">Email Host and Port</label>
+        <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="xxx.xxx.xxx" name="email_host" id="email_host"
+                   style="display: inline; width: 70%;margin-right: 0;padding-right: 0" value="{{ EMAIL_HOST }}">
+            <input class="input" type="text" placeholder=" xxxxx" name="email_port" id="email_port"
+                   style="display: inline; width: 15%;margin-left: 0;padding-left: 0;padding-right: 0;margin-right: 0"
+                   value="{{ EMAIL_PORT }}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-sitemap"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+            </span>
+        </p>
+        <p class="help is-danger" style="display: none;" id="invalid_email_host"></p>
+    </div>
+    <div class="field">
+        <label class="label" style="font-family:  FreeMono, monospace;display: inline">Save the files on web
+            server.</label>
+
+        <div class="field">
+            <div class="control">
+                <div class="buttons has-addons">
+
+                    <span class="button is-small {% if SAVE_FILES %}is-selected is-info{% endif %}"
+                          onclick="check_save_file(1)" id="save_file">Yes</span>
+                    <span class="button is-small {% if not SAVE_FILES %}is-selected is-info{% endif %}"
+                          onclick="check_save_file(0)" id="dont_save_file">No</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" style="font-family:  FreeMono, monospace;">Receiver Emails</label>
+        <p class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="xxx@xxx.xxx xxx@xxx.xxx" name="receiver_emails"
+                   id="receiver_emails"
+                   value="{{ ' '.join(RECEIVER_EMAILS) }}"
+            >
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+            </span>
+        </p>
+
+    </div>
+    <p class="help is-danger" style="display: none" id="invalid_receiver_email"></p>
+    <div style="margin-top: 10px" id="email_tags">
+
+    </div>
+</section>
+<div class="field is-grouped" style="position: fixed;bottom: 0;right: 0;">
+    <div class="control">
+        <button class="button is-link" onclick="submit_config()">Submit</button>
+    </div>
+    <div class="control">
+        <button class="button is-text" onclick="clear_config()">Clear</button>
+    </div>
+</div>
+
+</body>
+
+</html>

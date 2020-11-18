@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Send email.</title>
+    <link rel="stylesheet" href="../static/css/bulma.min.css">
+    <script defer src="../static/js/all.js"></script>
+    <script defer src="../static/js/send.js"></script>
+</head>
+
+<body>
+<section class="section" style="padding-bottom: 0;margin-bottom: 0">
+    <div class="container">
+        <h1 style="font-family:  FreeMono, monospace;font-size: xx-large">
+            Send email.
+        </h1>
+
+    </div>
+</section>
+
+<section class="section" style="margin-bottom: 0;padding-bottom: 0;padding-top: 10px">
+    <div class="field">
+        <label class="label" style="font-family:  FreeMono, monospace;display: inline">Delete files after sent.</label>
+        <div class="control">
+            <div class="buttons has-addons">
+                    <span class="button is-small"
+                          onclick="check_delete_file(1)" id="delete_file">Yes</span>
+                <span class="button is-small is-selected is-info"
+                      onclick="check_delete_file(0)" id="dont_delete_file">No</span>
+            </div>
+        </div>
+    </div>
+
+
+    <label class="label" style="font-family:  FreeMono, monospace;margin-bottom: 20px">Clink to Send</label>
+
+    {% for file_name in  files_list %}
+        <div style="margin-top: 10px;
+                font-size:
+                {% if file_name.__len__() > 30 %}
+                    {{ 16*30//file_name.__len__() }}px
+                {% endif %}
+                " onclick="send_email('{{ file_name }}')" id="{{ file_name }}" name="file_bar">
+            <progress class="is-primary progress is-large" value="0" max="100"
+                      style="position: absolute;left: 50%;-webkit-transform:translate(-50%,-50%);width: 90%">
+            </progress>
+            <div style="position:relative;left: 50%;-webkit-transform:translate(-50%,-50%);">
+        <span style="width:100%">
+            <span style="padding-right: 20px;">
+                {{ file_name }}
+            </span>
+            <span class="icon" style="padding-right:10px;margin-right: 0;right: 0;position: absolute">
+                <i class="fas fa-upload"></i>
+            </span>
+        </span>
+            </div>
+        </div>
+    {% endfor %}
+
+</section>
+
+
+<div class="field is-grouped" style="position: fixed;bottom: 0;right: 0;">
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-link" onclick="send_all_files()" style="font-size: 13px;">Send All Files.</button>
+        </div>
+    </div>
+    <div class="control">
+        <button class="button is-text" onclick="delete_all_files()" style="font-size: 13px;">Delete all
+            files on
+            server.
+        </button>
+    </div>
+</div>
+</body>
+
+</html>
